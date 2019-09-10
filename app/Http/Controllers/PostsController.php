@@ -9,8 +9,8 @@ class PostsController extends Controller
        $this->middleware('auth');
    }
    public function index(){
-       $posts = Post::all();
-       return view('posts.list')->with('posts', $posts);
+       $posts = Post::select('*')->join('users', 'posts.user_id', '=', 'users.id')->get();
+        return view('posts.list')->with('posts', $posts);
    }
    public function create() {
        return view('posts.create');

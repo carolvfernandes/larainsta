@@ -117,7 +117,7 @@
 
         <p class="m-3">
 
-            Não tem uma conta? <a href="{{ route('register') }}">Registre-se</a>
+            Não tem uma conta? <a href="{{ route('home') }}">Registre-se</a>
 
         </p>
 

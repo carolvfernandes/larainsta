@@ -46,12 +46,5 @@ class PostsController extends Controller
     return view('posts.list')->with('posts', $posts);;
    }
 
-  
-   public function addcomment (Request $data){
-    $post_comment= Post::findOrFail($data['idPost']);
-    $post_comment->likes += 1;
-    $posts = Post::all();
-    return view('posts.list')->with('posts', $posts);
-   }
    
 }

@@ -8,26 +8,19 @@
        <div class="col-md-8">
            @foreach ($posts as $post)
 
-            <div class="card mt-4">
-              <div>
+           <div class="card mt-4">
               <div class="card-body"> <a>@</a>{{$post->name}}</div>
                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
-                </div>
-                   
+
+
                 <div class="likedeslike">
                    <div class="card-body">{{$post->description}}</div>
                    <a class=" btn btn-success col-md-2" href="{{route('like', ['idPost' => $post->id])}}">like</a>
                         <a class="btn btn-danger col-md-2" href="{{route('deslike', ['idPost' => $post->id])}}">deslike</a>
                         <br>
-                        <span>{{$post->likes}} curtiram essa foto.</span>
+                        <span>{{$post->likes}} curtiram essa foto</span>
 
-
-                                        @foreach ($posts as $post)
-
-                                        <div class="card-body">
-                                        <strong> <a>@</a>{{$post->name}} </strong> {{$post->comentario}}
-                                        </div>  
-                                    @endforeach
+        
                                     
                                     <form method="POST" enctype="multipart/form-data" action="/posts">
                                     Comentário: 
@@ -47,5 +40,6 @@
    </div>
 
 </div>
+
 
 @endsection

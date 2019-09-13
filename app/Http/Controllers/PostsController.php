@@ -19,9 +19,20 @@ class PostsController extends Controller
     $post_like = Post::findOrFail($data['idPost']);
     $post_like->likes += 1;
     $post_like->save();
+    $post_like->auxlike = 1;
     $posts = Post::all();
     return view('posts.list')->with('posts', $posts);;
    }
+
+   public function deslike(Request $data){
+    $post_like = Post::findOrFail($data['idPost']);
+    $post_like->likes -= 1;
+    $post_like->save();
+    $post_like->auxlike = 0;
+    $posts = Post::all();
+    return view('posts.list')->with('posts', $posts);;
+   }
+
    public function store(Request $data){
        request()->validate([
            'image_path' => ['required', 'image']          

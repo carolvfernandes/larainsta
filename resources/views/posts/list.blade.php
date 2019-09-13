@@ -13,11 +13,10 @@
                    <img class="card-img-top" src="{{$post->image_path}}" alt="Card image cap">
                    
                    <div class="card-body">{{$post->description}}</div>
-                    @if ($post->likes == 0)
-                        <a class="btn btn-success" href="{{route('like', ['idPost' => $post->id])}}">Like</a>
-                    @else
+                   <a class=" btn btn-success col-md-2" href="{{route('like', ['idPost' => $post->id])}}">like</a>
+                        <a class="btn btn-danger col-md-2" href="{{route('deslike', ['idPost' => $post->id])}}">deslike</a>
                         <span>{{$post->likes}} likes</span>
-                    @endif
+
 
                                         @foreach ($posts as $post)
 

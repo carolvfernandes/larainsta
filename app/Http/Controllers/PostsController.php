@@ -15,11 +15,25 @@ class PostsController extends Controller
    public function create() {
        return view('posts.create');
    }
+
+   public function store(Request $data){
+    request()->validate([
+        'image_path' => ['required', 'image']          
+    ]);      
+    $post = Post::create([
+        'user_id' => auth()->id(),
+        'image_path' => request()->file('image_path')->store('posts', 'public'),
+        'description' => request('description'),
+        'filter' => request('filter'),
+        'likes' => 0
+    ])->save();
+    return redirect()->route('show_posts');
+}
+
    public function like(Request $data){
     $post_like = Post::findOrFail($data['idPost']);
     $post_like->likes += 1;
     $post_like->save();
-    $post_like->auxlike = 1;
     $posts = Post::all();
     return view('posts.list')->with('posts', $posts);;
    }
@@ -28,24 +42,11 @@ class PostsController extends Controller
     $post_like = Post::findOrFail($data['idPost']);
     $post_like->likes -= 1;
     $post_like->save();
-    $post_like->auxlike = 0;
     $posts = Post::all();
     return view('posts.list')->with('posts', $posts);;
    }
 
-   public function store(Request $data){
-       request()->validate([
-           'image_path' => ['required', 'image']          
-       ]);      
-       $post = Post::create([
-           'user_id' => auth()->id(),
-           'image_path' => request()->file('image_path')->store('posts', 'public'),
-           'description' => request('description'),
-           'filter' => request('filter'),
-           'likes' => 0
-       ])->save();
-       return redirect()->route('show_posts');
-   }
+  
    public function addcomment (Request $data){
     $post_comment= Post::findOrFail($data['idPost']);
     $post_comment->likes += 1;
